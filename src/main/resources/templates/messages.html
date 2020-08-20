@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-color: gray">
+<ol type="1">
+    <div th:each="message:${messages}">
+    <li th:text="${message.getUser().getUserName()+' : '+message.getText()}">q1</li>
+    </div>
+</ol>
+</body>
+</html>

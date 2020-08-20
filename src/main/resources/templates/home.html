@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .flex-container{
+            display: flex;
+            height: 600px;
+            padding: 0 4px;
+        }
+        .column{
+            flex: 50%;
+            max-width: 50%;
+            padding: 0 4px;
+        }
+        .column img {
+            margin-top: 8px;
+            vertical-align: middle;
+            width: 100%;
+        }
+        .submissionfield {
+            background-color: transparent;
+            font-size: 50px;
+            color: azure;
+            width: 300px;
+            height:90px;
+            border: 1px solid #999999;
+            padding: 5px;
+            margin: 10px;
+        }
+        .button{
+            background-color: teal;
+            width: 300px;
+            height:90px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>home page</title>
+</head>
+<body style="background-color: gray">
+<p style="background-color: transparent;color: cyan;text-align: center" >Welcome to your site
+<span th:text="${session.auth.getUserName()}"></span></p>
+<h3 style="color: blueviolet;text-align: center">today is : <span style="color: chartreuse" th:text="${date}">today</span></h3>
+<h3 style="color: coral;text-align: center">today is : <span style="color: darkblue" th:text="${ss}">today</span></h3>
+<div class="flex-container">
+    <div class="column">
+    <img src="../static/images/london2.jpg" alt="london2" th:src="@{/images/london2.jpg}">
+    <img src="../static/images/london4.jpg" alt="london4" th:src="@{/images/london4.jpg}">
+    </div>
+     <div class="column">
+    <img src="../static/images/london3.jpg" alt="london3" th:src="@{/images/london3.jpg}">
+         <img src="../static/images/sadeq1.jpg" alt="sadeq-photo" th:src="@{/images/sadeq1.jpg}">
+     </div>
+</div>
+<div >
+<form action="/process/data" method="post">
+    <label for="i1" class="submissionfield">any thing you want that sadeq see</label><br>
+    <input id="i1" class="submissionfield" type="text" name="text" placeholder="sadeq vision"><br>
+    <button class="button" type="submit">send for sadeq</button>
+</form>
+</div>
+<button class="button"><a href="/texts?find=all"/>view text</button>
+<button class="button"><a href="/download"/>download sponge Bob </button>
+</body>
+</html>
