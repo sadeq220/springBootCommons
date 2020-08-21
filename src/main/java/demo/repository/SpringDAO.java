@@ -15,7 +15,7 @@ public interface SpringDAO extends JpaRepository<demo.model.User,String>,Referen
     <S extends User> S save(S entity);
 
 
-    Optional<User> findByUserName(String s);
+    User findByUserName(String s);
 
     @Override
     Optional<User> findById(String s);

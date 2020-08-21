@@ -38,7 +38,7 @@
 </head>
 <body style="background-color: gray">
 <p style="background-color: transparent;color: cyan;text-align: center" >Welcome to your site
-<span th:text="${session.auth.getUserName()}"></span></p>
+<span th:text="${#request.userPrincipal.getName()}"></span></p>
 <h3 style="color: blueviolet;text-align: center">today is : <span style="color: chartreuse" th:text="${date}">today</span></h3>
 <h3 style="color: coral;text-align: center">today is : <span style="color: darkblue" th:text="${ss}">today</span></h3>
 <div class="flex-container">

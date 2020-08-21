@@ -4,7 +4,6 @@ import demo.model.Message;
 import demo.model.User;
 import demo.repository.DAOmessage;
 import demo.repository.SpringDAO;
-import demo.writer.Writer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
@@ -33,18 +32,18 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/")
 public class Controller {
-    private Writer writer;
+
     private DAOmessage daOmessage;
     private SpringDAO userDao;
+
     @Autowired
-    public Controller(Writer writer, DAOmessage daOmessage, SpringDAO dao){
-       this.writer=writer;
+    public Controller(DAOmessage daOmessage, SpringDAO dao){
        this.daOmessage=daOmessage;
        userDao=dao;
     }
 
     @GetMapping(value = {"/","/home"})
-    public ModelAndView getDate(HttpSession session){
+    public ModelAndView getDate(){
         ModelAndView modelAndView=new ModelAndView("home");
         String s=String.format("%1$ta %1$tB",LocalDate.now());
         modelAndView.addObject("date",LocalDate.now());
@@ -74,7 +73,6 @@ public class Controller {
             return;
        Message message=new Message(txt,userDao.getReference(((User)session.getAttribute("auth")).getUserName()));
        daOmessage.save(message);
-       this.writer.saveFile(txt);
        response.sendRedirect("/home");
     }
     @GetMapping("/texts")
