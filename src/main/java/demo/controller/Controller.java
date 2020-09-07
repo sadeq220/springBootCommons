@@ -43,7 +43,8 @@ public class Controller {
     }
 
     @GetMapping(value = {"/","/home"})
-    public ModelAndView getDate(){
+    public ModelAndView getDate(HttpServletRequest request){
+        System.out.println(request.getRemoteAddr());
         ModelAndView modelAndView=new ModelAndView("home");
         String s=String.format("%1$ta %1$tB",LocalDate.now());
         modelAndView.addObject("date",LocalDate.now());
@@ -68,10 +69,10 @@ public class Controller {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM).body(streamResource);
     }
     @PostMapping(value = "/process/data")
-    public void process(@RequestParam(name = "text")String txt, HttpServletResponse response,HttpSession session)throws IOException {
+    public void process(@RequestParam(name = "text")String txt, HttpServletResponse response,HttpServletRequest request)throws IOException {
         if(txt==null || txt.isEmpty())
             return;
-       Message message=new Message(txt,userDao.getReference(((User)session.getAttribute("auth")).getUserName()));
+       Message message=new Message(txt,userDao.getReference(request.getUserPrincipal().getName()));
        daOmessage.save(message);
        response.sendRedirect("/home");
     }
